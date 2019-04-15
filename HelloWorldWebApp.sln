@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorldWebApp", "HelloWorldWebApp\HelloWorldWebApp.csproj", "{1FD5108B-37C0-429D-A605-322C6D88DD6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorldWebAppTests", "HelloWorldWebAppTests\HelloWorldWebAppTests.csproj", "{7971262D-DA60-410A-AD3B-099EC4BC4AEF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1FD5108B-37C0-429D-A605-322C6D88DD6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FD5108B-37C0-429D-A605-322C6D88DD6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FD5108B-37C0-429D-A605-322C6D88DD6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FD5108B-37C0-429D-A605-322C6D88DD6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7971262D-DA60-410A-AD3B-099EC4BC4AEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7971262D-DA60-410A-AD3B-099EC4BC4AEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7971262D-DA60-410A-AD3B-099EC4BC4AEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7971262D-DA60-410A-AD3B-099EC4BC4AEF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
