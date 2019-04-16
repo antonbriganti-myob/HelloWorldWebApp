@@ -16,5 +16,10 @@ namespace HelloWorldWebApp.Models
         {
 
         }
+
+        public Person(string name)
+        {
+            this.Name = name;
+        }
     }
 }
