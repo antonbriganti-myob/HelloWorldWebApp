@@ -20,7 +20,7 @@ namespace HelloWorldWebAppTests
         }
 
         [Fact]
-        public void GetPeopleInServerAsString_ReturnsSingleName()
+        public void GetPeopleInServerAsString_ReturnsSingleName_WhenGivenSinglePerson()
         {
             // Given
             List<Person> NameList = new List<Person>
@@ -29,8 +29,47 @@ namespace HelloWorldWebAppTests
             };
 
             // When
-            string actualMessage = _messageBuilder.CreateGetTimeMessage(NameList);
-            string expectedMessage = "Hello Anton - the time on the server is 10:48pm on 14 March 2018";
+            string actualMessage = _messageBuilder.GetPeopleInServerAsString(NameList);
+            string expectedMessage = "Anton";
+
+
+            // Then
+            Assert.Equal(expectedMessage, actualMessage);
+        }
+
+        [Fact]
+        public void GetPeopleInServerAsString_ReturnsTwoNamesInCorrectFormatting_WhenGivenTwoPeople()
+        {
+            // Given
+            List<Person> NameList = new List<Person>
+            {
+                new Person("Anton"),
+                new Person("Deb")
+            };
+
+            // When
+            string actualMessage = _messageBuilder.GetPeopleInServerAsString(NameList);
+            string expectedMessage = "Anton and Deb";
+
+
+            // Then
+            Assert.Equal(expectedMessage, actualMessage);
+        }
+
+        [Fact]
+        public void GetPeopleInServerAsString_ReturnsThreeNamesInCorrectFormatting_WhenGivenThreePeople()
+        {
+            // Given
+            List<Person> NameList = new List<Person>
+            {
+                new Person("Anton"),
+                new Person("Deb"),
+                new Person("Tim")
+            };
+
+            // When
+            string actualMessage = _messageBuilder.GetPeopleInServerAsString(NameList);
+            string expectedMessage = "Anton, Deb, and Tim";
 
 
             // Then

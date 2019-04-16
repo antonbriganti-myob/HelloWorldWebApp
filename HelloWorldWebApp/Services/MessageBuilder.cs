@@ -33,7 +33,7 @@ namespace HelloWorldWebApp.Services
             }
             else if (PeopleList.Count == 2)
             {
-                Message = string.Format("{0} & {1}",
+                Message = string.Format("{0} and {1}",
                                         PeopleList[0].Name,
                                         PeopleList[1].Name);
             }
