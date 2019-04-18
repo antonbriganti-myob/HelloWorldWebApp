@@ -3,6 +3,6 @@ namespace HelloWorldWebApp.Services
 {
     public interface IDateTime
     {
-        string GetCurrentTimeAndDate();
+        DateTime GetCurrentTimeAndDate();
     }
 }

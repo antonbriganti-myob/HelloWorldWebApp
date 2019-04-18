@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using HelloWorldWebApp.Models;
 using HelloWorldWebApp.Services;
+using HelloWorldWebAppTests.Helpers;
 using Moq;
 using Xunit;
 
@@ -13,8 +14,7 @@ namespace HelloWorldWebAppTests
         private readonly MessageBuilder _messageBuilder;
         public MessageBuilderTest()
         {
-            var dateTimeMock = new Mock<IDateTime>();
-            dateTimeMock.Setup(dateTime => dateTime.GetCurrentTimeAndDate()).Returns("10:48pm on 14 March 2018");
+            var dateTimeMock = DateTimeHelper.CreateMockDateTime();
             _messageBuilder = new MessageBuilder(dateTimeMock.Object);
 
         }

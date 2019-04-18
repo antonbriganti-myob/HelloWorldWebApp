@@ -14,7 +14,8 @@ namespace HelloWorldWebApp.Services
 
         public String CreateGetTimeMessage(List<Person> PeopleList)
         {
-            string CurrentTime = _dateTime.GetCurrentTimeAndDate();
+            string CurrentTime = _dateTime.GetCurrentTimeAndDate()
+                                          .ToString("h:mmtt on dd MMMM yyyy");
             string People = GetPeopleInServerAsString(PeopleList);
             string Message = string.Format("Hello {0} - the time on the server is {1}",
                                         People,
