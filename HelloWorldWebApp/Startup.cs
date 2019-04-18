@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HelloWorldWebApp.Data;
+using HelloWorldWebApp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +30,7 @@ namespace HelloWorldWebApp
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<PeopleContext>(options => options.UseInMemoryDatabase("People"));
+            services.AddSingleton<IDateTime, SystemDateTime>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

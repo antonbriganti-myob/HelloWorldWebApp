@@ -16,10 +16,10 @@ namespace HelloWorldWebApp.Controllers
         private readonly PeopleContext _context;
         private readonly MessageBuilder _messagebuilder;
 
-        public TimeController(PeopleContext context)
+        public TimeController(PeopleContext context, IDateTime dateTime)
         {
             _context = context;
-            _messagebuilder = new MessageBuilder(new ActualDateTime());
+            _messagebuilder = new MessageBuilder(dateTime);
         }
 
         [HttpGet]
@@ -31,15 +31,19 @@ namespace HelloWorldWebApp.Controllers
 
 
         [HttpPost]
-        public async void AddPersonToWorld(Person person)
+        public async Task<IActionResult> AddPersonToWorld(Person person)
         {
             if (_context.People.Find(person.Name) == null)
             {
                 _context.People.Add(person);
                 await _context.SaveChangesAsync();
+                return CreatedAtAction("AddPersonToWorld", person);
+            }
+            else
+            {
+                return BadRequest();
             }
 
-            //todo: return if the person was added (200) or if they already existed (???)
         }
     }
 }
