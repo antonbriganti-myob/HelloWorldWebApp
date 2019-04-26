@@ -26,6 +26,13 @@ namespace HelloWorldWebApp.Controllers
             var message = _messagebuilder.CreateGetTimeMessage(_context.People.ToList());
             return message;
         }
+        
+        [HttpGet("people")]
+        public ActionResult<string> GetNamesInServer()
+        {
+            var message = _messagebuilder.GetPeopleInServerAsString(_context.People.ToList());
+            return message;
+        }
 
 
         [HttpPost]
