@@ -14,28 +14,22 @@ namespace HelloWorldWebAppTests
 {
     public class TimeControllerTest
     {
+
         [Fact]
         public void GETRequest_ReturnsNameAndTime()
         {
             // given
-            var mockPeopleContext = new Mock<PeopleContext>();
-            //todo: discuss how to mock DbSet
-            //mockPeopleContext.SetupGet(context => context.People).Returns(???);
 
-            var dateTimeMock = DateTimeHelper.CreateMockDateTime();
-
-            var TestController = new TimeController(mockPeopleContext.Object, dateTimeMock.Object);
-
-            //"Hello Anton - the time on the server is 10:48pm on 14 March 2018"
+            // IPeopleContext, IMessageBuilder
+  
 
             // when 
-            ActionResult<string> ActualResult = TestController.GetCurrentTime();
-            var ExpectedResult = "Hello Anton - the time on the server is 10:48pm on 14 March 2018";
+
+            //SEE IF HAS BEEN CALLED (MESSAGE BUILDER AFTER TESTCONTROLLER.GET()
 
             // then
 
-            Assert.Equal(ExpectedResult, ActualResult.Value);
+        
         }
-
     }
 }

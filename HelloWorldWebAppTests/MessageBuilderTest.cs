@@ -11,11 +11,11 @@ namespace HelloWorldWebAppTests
     public class MessageBuilderTest
     {
 
-        private readonly MessageBuilder _messageBuilder;
+        private readonly ActualMessageBuilder _messageBuilder;
         public MessageBuilderTest()
         {
             var dateTimeMock = DateTimeHelper.CreateMockDateTime();
-            _messageBuilder = new MessageBuilder(dateTimeMock.Object);
+            _messageBuilder = new ActualMessageBuilder(dateTimeMock.Object);
 
         }
 
@@ -23,14 +23,14 @@ namespace HelloWorldWebAppTests
         public void GetPeopleInServerAsString_ReturnsSingleName_WhenGivenSinglePerson()
         {
             // Given
-            List<Person> NameList = new List<Person>
+            var nameList = new List<Person>
             {
                 new Person("Anton")
             };
 
             // When
-            string actualMessage = _messageBuilder.GetPeopleInServerAsString(NameList);
-            string expectedMessage = "Anton";
+            var actualMessage = _messageBuilder.GetPeopleInServerAsString(nameList);
+            var expectedMessage = "Anton";
 
 
             // Then
@@ -41,15 +41,15 @@ namespace HelloWorldWebAppTests
         public void GetPeopleInServerAsString_ReturnsTwoNamesInCorrectFormatting_WhenGivenTwoPeople()
         {
             // Given
-            List<Person> NameList = new List<Person>
+            var nameList = new List<Person>
             {
                 new Person("Anton"),
                 new Person("Deb")
             };
 
             // When
-            string actualMessage = _messageBuilder.GetPeopleInServerAsString(NameList);
-            string expectedMessage = "Anton and Deb";
+            var actualMessage = _messageBuilder.GetPeopleInServerAsString(nameList);
+            var expectedMessage = "Anton and Deb";
 
 
             // Then
@@ -60,7 +60,7 @@ namespace HelloWorldWebAppTests
         public void GetPeopleInServerAsString_ReturnsThreeNamesInCorrectFormatting_WhenGivenThreePeople()
         {
             // Given
-            List<Person> NameList = new List<Person>
+            var nameList = new List<Person>
             {
                 new Person("Anton"),
                 new Person("Deb"),
@@ -68,8 +68,8 @@ namespace HelloWorldWebAppTests
             };
 
             // When
-            string actualMessage = _messageBuilder.GetPeopleInServerAsString(NameList);
-            string expectedMessage = "Anton, Deb, and Tim";
+            var actualMessage = _messageBuilder.GetPeopleInServerAsString(nameList);
+            var expectedMessage = "Anton, Deb, and Tim";
 
 
             // Then
@@ -79,13 +79,13 @@ namespace HelloWorldWebAppTests
         [Fact]
         public void CreateGetTimeMessage_ReturnsCorrectlyFormattedMessage()
         {
-            List<Person> NameList = new List<Person>
+            var nameList = new List<Person>
             {
                 new Person("Anton")
             };
 
-            string actualMessage = _messageBuilder.CreateGetTimeMessage(NameList);
-            string expectedMessage = "Hello Anton - the time on the server is 10:48pm on 14 March 2018";
+            var actualMessage = _messageBuilder.CreateGetTimeMessage(nameList);
+            var expectedMessage = "Hello Anton - the time on the server is 10:48pm on 14 March 2018";
 
             Assert.Equal(expectedMessage, actualMessage);
         }

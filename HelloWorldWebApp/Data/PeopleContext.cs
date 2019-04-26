@@ -14,5 +14,13 @@ namespace HelloWorldWebApp.Data
 
         public DbSet<Person> People { get; set; }
 
+
+
+        //todo: make peopleService class to do this instead, with injection of DbContext
+        public List<Person> GetPeopleList()
+        {
+            return People.ToList();
+        }
+
     }
 }

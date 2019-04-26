@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using HelloWorldWebApp.Data;
 using HelloWorldWebApp.Models;
@@ -14,19 +12,19 @@ namespace HelloWorldWebApp.Controllers
     public class TimeController : ControllerBase
     {
         private readonly PeopleContext _context;
-        private readonly MessageBuilder _messagebuilder;
+        private readonly IMessageBuilder _messagebuilder;
 
-        public TimeController(PeopleContext context, IDateTime dateTime)
+        public TimeController(PeopleContext context, IMessageBuilder builder)
         {
             _context = context;
-            _messagebuilder = new MessageBuilder(dateTime);
+            _messagebuilder = builder;
         }
 
         [HttpGet]
-        public ActionResult<String> GetCurrentTime()
+        public ActionResult<string> GetCurrentTime()
         {
-            var Message = _messagebuilder.CreateGetTimeMessage(_context.People.ToList());
-            return Message;
+            var message = _messagebuilder.CreateGetTimeMessage(_context.People.ToList());
+            return message;
         }
 
 

@@ -3,9 +3,6 @@ namespace HelloWorldWebApp.Services
 {
     public class SystemDateTime : IDateTime
     {
-        public SystemDateTime()
-        {
-        }
 
         public DateTime GetCurrentTimeAndDate()
         {

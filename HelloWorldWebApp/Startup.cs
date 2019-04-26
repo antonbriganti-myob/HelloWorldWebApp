@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using HelloWorldWebApp.Data;
+﻿using HelloWorldWebApp.Data;
 using HelloWorldWebApp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +26,7 @@ namespace HelloWorldWebApp
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<PeopleContext>(options => options.UseInMemoryDatabase("People"));
+            services.AddSingleton<IMessageBuilder, ActualMessageBuilder>();
             services.AddSingleton<IDateTime, SystemDateTime>();
         }
 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 // Representation of a person in memory
 
@@ -19,7 +18,7 @@ namespace HelloWorldWebApp.Models
 
         public Person(string name)
         {
-            this.Name = name;
+            Name = name;
         }
     }
 }
