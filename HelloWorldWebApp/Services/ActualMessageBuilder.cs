@@ -23,7 +23,7 @@ namespace HelloWorldWebApp.Services
 
         public string GetPeopleInServerAsString(List<Person> peopleList)
         {
-            return string.Join(",", peopleList);
+            return string.Join(", ", peopleList);
         }
 
         public string CreateFormattedMessageOfPeopleInServer(List<Person> peopleList)
