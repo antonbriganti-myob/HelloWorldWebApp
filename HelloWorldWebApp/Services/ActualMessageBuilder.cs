@@ -15,13 +15,18 @@ namespace HelloWorldWebApp.Services
         {
             var currentTime = _dateTime.GetCurrentTimeAndDate()
                                           .ToString("h:mmtt on dd MMMM yyyy");
-            var people = GetPeopleInServerAsString(peopleList);
+            var people = CreateFormattedMessageOfPeopleInServer(peopleList);
             var message = $"Hello {people} - the time on the server is {currentTime}";
 
             return message;
         }
 
         public string GetPeopleInServerAsString(List<Person> peopleList)
+        {
+            return string.Join(",", peopleList);
+        }
+
+        public string CreateFormattedMessageOfPeopleInServer(List<Person> peopleList)
         {
             var message = "";
 

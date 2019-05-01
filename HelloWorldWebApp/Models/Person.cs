@@ -20,5 +20,10 @@ namespace HelloWorldWebApp.Models
         {
             Name = name;
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

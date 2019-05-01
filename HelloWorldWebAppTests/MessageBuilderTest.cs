@@ -20,7 +20,7 @@ namespace HelloWorldWebAppTests
         }
 
         [Fact]
-        public void GetPeopleInServerAsString_ReturnsSingleName_WhenGivenSinglePerson()
+        public void CreateFormattedMessageOfPeopleInServer_ReturnsSingleName_WhenGivenSinglePerson()
         {
             // Given
             var nameList = new List<Person>
@@ -29,7 +29,7 @@ namespace HelloWorldWebAppTests
             };
 
             // When
-            var actualMessage = _messageBuilder.GetPeopleInServerAsString(nameList);
+            var actualMessage = _messageBuilder.CreateFormattedMessageOfPeopleInServer(nameList);
             var expectedMessage = "Anton";
 
 
@@ -38,7 +38,7 @@ namespace HelloWorldWebAppTests
         }
 
         [Fact]
-        public void GetPeopleInServerAsString_ReturnsTwoNamesInCorrectFormatting_WhenGivenTwoPeople()
+        public void CreateFormattedMessageOfPeopleInServer_ReturnsTwoNamesInCorrectFormatting_WhenGivenTwoPeople()
         {
             // Given
             var nameList = new List<Person>
@@ -48,7 +48,7 @@ namespace HelloWorldWebAppTests
             };
 
             // When
-            var actualMessage = _messageBuilder.GetPeopleInServerAsString(nameList);
+            var actualMessage = _messageBuilder.CreateFormattedMessageOfPeopleInServer(nameList);
             var expectedMessage = "Anton and Deb";
 
 
@@ -57,7 +57,7 @@ namespace HelloWorldWebAppTests
         }
 
         [Fact]
-        public void GetPeopleInServerAsString_ReturnsThreeNamesInCorrectFormatting_WhenGivenThreePeople()
+        public void CreateFormattedMessageOfPeopleInServer_ReturnsThreeNamesInCorrectFormatting_WhenGivenThreePeople()
         {
             // Given
             var nameList = new List<Person>
@@ -68,7 +68,7 @@ namespace HelloWorldWebAppTests
             };
 
             // When
-            var actualMessage = _messageBuilder.GetPeopleInServerAsString(nameList);
+            var actualMessage = _messageBuilder.CreateFormattedMessageOfPeopleInServer(nameList);
             var expectedMessage = "Anton, Deb, and Tim";
 
 
@@ -85,7 +85,7 @@ namespace HelloWorldWebAppTests
             };
 
             var actualMessage = _messageBuilder.CreateGetTimeMessage(nameList);
-            var expectedMessage = "Hello Anton - the time on the server is 10:48pm on 14 March 2018";
+            var expectedMessage = "Hello Anton - the time on the server is 10:48PM on 14 March 2018";
 
             Assert.Equal(expectedMessage, actualMessage);
         }
