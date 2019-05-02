@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -21,7 +21,6 @@
       <HintPath>..\..\..\..\..\..\usr\local\share\dotnet\sdk\NuGetFallbackFolder\microsoft.entityframeworkcore\2.1.1\lib\netstandard2.0\Microsoft.EntityFrameworkCore.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNetCore.Mvc.Core, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60" />
-    <Reference Include="Microsoft.AspNetCore.Mvc.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60" />
     <Reference Include="Microsoft.AspNetCore.Mvc.Core">
       <HintPath>..\..\..\..\..\..\usr\local\share\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.mvc.core\2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Core.dll</HintPath>
     </Reference>

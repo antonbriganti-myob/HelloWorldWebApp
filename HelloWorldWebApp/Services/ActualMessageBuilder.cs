@@ -11,11 +11,11 @@ namespace HelloWorldWebApp.Services
             _dateTime = dateTime;
         }
 
-        public string CreateGetTimeMessage(List<Person> peopleList)
+        public string CreateGreetingWithTimeMessage(List<Person> peopleList)
         {
             var currentTime = _dateTime.GetCurrentTimeAndDate()
                                           .ToString("h:mmtt on dd MMMM yyyy");
-            var people = CreateFormattedMessageOfPeopleInServer(peopleList);
+            var people = CreateGreetingMessage(peopleList);
             var message = $"Hello {people} - the time on the server is {currentTime}";
 
             return message;
@@ -26,7 +26,7 @@ namespace HelloWorldWebApp.Services
             return string.Join(", ", peopleList);
         }
 
-        public string CreateFormattedMessageOfPeopleInServer(List<Person> peopleList)
+        public string CreateGreetingMessage(List<Person> peopleList)
         {
             var message = "";
 

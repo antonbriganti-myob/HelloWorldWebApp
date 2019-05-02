@@ -29,7 +29,7 @@ namespace HelloWorldWebAppTests
             };
 
             // When
-            var actualMessage = _messageBuilder.CreateFormattedMessageOfPeopleInServer(nameList);
+            var actualMessage = _messageBuilder.CreateGreetingMessage(nameList);
             var expectedMessage = "Anton";
 
 
@@ -48,7 +48,7 @@ namespace HelloWorldWebAppTests
             };
 
             // When
-            var actualMessage = _messageBuilder.CreateFormattedMessageOfPeopleInServer(nameList);
+            var actualMessage = _messageBuilder.CreateGreetingMessage(nameList);
             var expectedMessage = "Anton and Deb";
 
 
@@ -68,7 +68,7 @@ namespace HelloWorldWebAppTests
             };
 
             // When
-            var actualMessage = _messageBuilder.CreateFormattedMessageOfPeopleInServer(nameList);
+            var actualMessage = _messageBuilder.CreateGreetingMessage(nameList);
             var expectedMessage = "Anton, Deb, and Tim";
 
 
@@ -84,7 +84,7 @@ namespace HelloWorldWebAppTests
                 new Person("Anton")
             };
 
-            var actualMessage = _messageBuilder.CreateGetTimeMessage(nameList);
+            var actualMessage = _messageBuilder.CreateGreetingWithTimeMessage(nameList);
             var expectedMessage = "Hello Anton - the time on the server is 10:48PM on 14 March 2018";
 
             Assert.Equal(expectedMessage, actualMessage);

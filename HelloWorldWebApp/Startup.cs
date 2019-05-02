@@ -28,6 +28,7 @@ namespace HelloWorldWebApp
             services.AddDbContext<PeopleContext>(options => options.UseInMemoryDatabase("People"));
             services.AddSingleton<IMessageBuilder, ActualMessageBuilder>();
             services.AddSingleton<IDateTime, SystemDateTime>();
+            services.AddScoped<IPeopleRepository, ActualPeopleRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
