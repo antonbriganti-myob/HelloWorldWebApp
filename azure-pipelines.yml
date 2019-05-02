@@ -22,16 +22,13 @@ steps:
     command: test
     projects: '**/*Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
-  name: Run Tests
 - task: DotNetCoreCLI@2
-  name: Publish
   inputs:
     command: publish
     publishWebProjects: True
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: True
 - task: AzureRmWebAppDeployment@3
-  name: Deploy
   inputs:
     azureSubscription: 'antonbriganti-myob'
     WebAppName: 'FMA-HelloWorld'
