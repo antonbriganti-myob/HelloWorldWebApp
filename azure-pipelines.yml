@@ -23,8 +23,3 @@ steps:
     command: test
     projects: '**/*Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
-#- task: AzureRmWebAppDeployment@3
-#  inputs:
-#    azureSubscription: 'antonbriganti-myob'
-#    WebAppName: 'FMA-HelloWorld'
-#    Package: $(System.ArtifactsDirectory)/**/*.zip
