@@ -18,18 +18,20 @@ steps:
 - script: dotnet build HelloWorldWebApp --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
 - task: DotNetCoreCLI@2
+  displayName: 'running tests'
   inputs:
     command: test
     projects: '**/*Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
 - task: DotNetCoreCLI@2
+  displayName: 'create artifacts for distribution'
   inputs:
     command: publish
     publishWebProjects: True
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: True
-- task: AzureRmWebAppDeployment@3
-  inputs:
-    azureSubscription: 'antonbriganti-myob'
-    WebAppName: 'FMA-HelloWorld'
-    Package: $(System.ArtifactsDirectory)/**/*.zip
+#- task: AzureRmWebAppDeployment@3
+#  inputs:
+#    azureSubscription: 'antonbriganti-myob'
+#    WebAppName: 'FMA-HelloWorld'
+#    Package: $(System.ArtifactsDirectory)/**/*.zip
