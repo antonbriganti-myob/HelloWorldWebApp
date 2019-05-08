@@ -21,21 +21,26 @@ namespace HelloWorldWebApp.Services
             return _context.People.ToList();
         }
         
-        public bool CheckIfNameExistsInWorld(string name)
+        public bool CheckIfNameExistsInDataStore(string name)
         {
-            return (_context.People.Find(name) != null);
+            return GetPersonFromContext(name) != null;
+        }
+
+        private Person GetPersonFromContext(string name)
+        {
+            return _context.People.FirstOrDefault(person => person.Name == name);
         }
 
 
-        public Task<int> AddPersonToContext(Person person)
+        public Task<int> AddPersonToDataStore(Person person)
         {
             _context.People.Add(person);
             return _context.SaveChangesAsync();
         }
 
-        public Task<int> RemovePersonFromWorld(Person person)
+        public Task<int> RemovePersonFromDataStore(Person person)
         {
-            _context.People.Remove(_context.People.Find(person.Name));
+            _context.People.Remove(GetPersonFromContext(person.Name));
             return _context.SaveChangesAsync();
         }
         
@@ -43,7 +48,7 @@ namespace HelloWorldWebApp.Services
 
         public bool CheckIfOwnerName(string name)
         {
-            return (name == "Anton");
+            return name == "Anton";
         }
     }
 }

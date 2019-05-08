@@ -6,9 +6,10 @@ namespace HelloWorldWebApp.Models
 {
     public class Person
     {
-
+        
+        public long Id { get; set; }
+        
         [Required]
-        [Key]
         public string Name { get; set; }
 
         public Person()

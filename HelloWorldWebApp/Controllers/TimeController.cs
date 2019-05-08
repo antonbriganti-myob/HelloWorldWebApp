@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using HelloWorldWebApp.Models;
 using HelloWorldWebApp.Services;
@@ -39,9 +39,9 @@ namespace HelloWorldWebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> AddPersonToWorld(Person person)
         {
-            if (!_peopleRepository.CheckIfNameExistsInWorld(person.Name))
+            if (!_peopleRepository.CheckIfNameExistsInDataStore(person.Name))
             {
-                await _peopleRepository.AddPersonToContext(person);
+                await _peopleRepository.AddPersonToDataStore(person);
                 return CreatedAtAction("AddPersonToWorld", person, person.Name + " has been added to the world");
             }
 
@@ -53,11 +53,11 @@ namespace HelloWorldWebApp.Controllers
         public async Task<IActionResult> RemovePersonFromWorld(Person person)
         {
             
-            if (!CheckIfOwner(person))
+            if (!CheckIfOwnerName(person.Name))
             {
-                if (!_peopleRepository.CheckIfNameExistsInWorld(person.Name))
+                if (!_peopleRepository.CheckIfNameExistsInDataStore(person.Name))
                     return NotFound("No such person with that name exists in the world");
-                await _peopleRepository.RemovePersonFromWorld(person);
+                await _peopleRepository.RemovePersonFromDataStore(person);
                 return new OkObjectResult(person.Name + " has been removed from the world");
 
             }
@@ -71,9 +71,9 @@ namespace HelloWorldWebApp.Controllers
             return BadRequest();
         }
 
-        private static bool CheckIfOwner(Person person)
+        private static bool CheckIfOwnerName(string name)
         {
-            return person.Name == "Anton";
+            return name == "Anton";
         }
     }
 }

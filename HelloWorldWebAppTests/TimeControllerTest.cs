@@ -73,95 +73,91 @@ namespace HelloWorldWebAppTests
         
         
         [Fact]
-        public void AddPersonToWorld_Calls_AddPersonToContext_WhenNameDoesntExist()
+        public void AddPersonToWorld_Calls_AddPersonToDataStore_WhenNameDoesNotExist()
         {
             // given
-            var mockMessageBuilder = new Mock<IMessageBuilder>(); 
             var testPerson = new Person("Anton");
             var mockRepo = new Mock<IPeopleRepository>();
-            mockRepo.Setup(repo => repo.CheckIfNameExistsInWorld(testPerson.Name)).Returns(false);
-            mockRepo.Setup(repo => repo.AddPersonToContext(testPerson));
+            mockRepo.Setup(repo => repo.CheckIfNameExistsInDataStore(testPerson.Name)).Returns(false);
+            mockRepo.Setup(repo => repo.AddPersonToDataStore(testPerson));
     
-            var controller = new TimeController(mockRepo.Object, mockMessageBuilder.Object);
+            var controller = new TimeController(mockRepo.Object, new Mock<IMessageBuilder>().Object);
             // when 
             controller.AddPersonToWorld(testPerson);
             
             // then
-            mockRepo.Verify(repo => repo.AddPersonToContext(testPerson));
+            mockRepo.Verify(repo => repo.AddPersonToDataStore(testPerson));
         }
         
         [Fact]
-        public void AddPersonToWorld_DoesntCalls_AddPersonToContext_WhenNameExists()
+        public void AddPersonToWorld_DoesNotCall_AddPersonToDataStore_WhenNameExists()
         {
             // given
-            var mockMessageBuilder = new Mock<IMessageBuilder>(); 
             var testPerson = new Person("Anton");
             var mockRepo = new Mock<IPeopleRepository>();
-            mockRepo.Setup(repo => repo.CheckIfNameExistsInWorld(testPerson.Name)).Returns(true);
-            mockRepo.Setup(repo => repo.AddPersonToContext(testPerson));
+            mockRepo.Setup(repo => repo.CheckIfNameExistsInDataStore(testPerson.Name)).Returns(true);
+            mockRepo.Setup(repo => repo.AddPersonToDataStore(testPerson));
     
-            var controller = new TimeController(mockRepo.Object, mockMessageBuilder.Object);
+            var controller = new TimeController(mockRepo.Object, new Mock<IMessageBuilder>().Object);
             // when 
             controller.AddPersonToWorld(testPerson);
             
             // then
 
-            mockRepo.Verify(repo => repo.AddPersonToContext(testPerson), Times.Never);
+            mockRepo.Verify(repo => repo.AddPersonToDataStore(testPerson), Times.Never);
         }
         
         [Fact]
-        public void RemovePersonFromWorld_Calls_RemovePersonFromWorld_WhenNameExists()
+        public void RemovePersonFromWorld_Calls_RemovePersonFromDataStore_WhenNameExists()
         {
             // given
-            var mockMessageBuilder = new Mock<IMessageBuilder>(); 
             var testPerson = new Person("John");
             var mockRepo = new Mock<IPeopleRepository>();
-            mockRepo.Setup(repo => repo.CheckIfNameExistsInWorld(testPerson.Name)).Returns(true);
-            mockRepo.Setup(repo => repo.RemovePersonFromWorld(testPerson));
+            mockRepo.Setup(repo => repo.CheckIfNameExistsInDataStore(testPerson.Name)).Returns(true);
+            mockRepo.Setup(repo => repo.RemovePersonFromDataStore(testPerson));
     
-            var controller = new TimeController(mockRepo.Object, mockMessageBuilder.Object);
+            var controller = new TimeController(mockRepo.Object, new Mock<IMessageBuilder>().Object);
+           
             // when 
             controller.RemovePersonFromWorld(testPerson);
             
             // then
 
-            mockRepo.Verify(repo => repo.RemovePersonFromWorld(testPerson));
+            mockRepo.Verify(repo => repo.RemovePersonFromDataStore(testPerson));
         }
         
         [Fact]
-        public void RemovePersonFromWorld_DoesntCall_RemovePersonFromWorld_WhenNameDoesntExists()
+        public void RemovePersonFromWorld_DoesNotCall_RemovePersonFromDataStore_WhenNameDoesNotExists()
         {
             // given
-            var mockMessageBuilder = new Mock<IMessageBuilder>(); 
             var testPerson = new Person("John");
             var mockRepo = new Mock<IPeopleRepository>();
-            mockRepo.Setup(repo => repo.CheckIfNameExistsInWorld(testPerson.Name)).Returns(false);
-            mockRepo.Setup(repo => repo.RemovePersonFromWorld(testPerson));
+            mockRepo.Setup(repo => repo.CheckIfNameExistsInDataStore(testPerson.Name)).Returns(false);
+            mockRepo.Setup(repo => repo.RemovePersonFromDataStore(testPerson));
     
-            var controller = new TimeController(mockRepo.Object, mockMessageBuilder.Object);
+            var controller = new TimeController(mockRepo.Object, new Mock<IMessageBuilder>().Object);
+          
             // when 
             controller.RemovePersonFromWorld(testPerson);
             
             // then
-
-            mockRepo.Verify(repo => repo.RemovePersonFromWorld(testPerson), Times.Never);
+            mockRepo.Verify(repo => repo.RemovePersonFromDataStore(testPerson), Times.Never);
         }
         
         [Fact]
-        public void RemovePersonFromWorld_DoesntCall_CheckIfNameExistsInWorld_WhenNameIsAnton()
+        public void RemovePersonFromWorld_DoesNotCall_RemovePersonFromDataStore_WhenNameIsAnton()
         {
             // given
-            var mockMessageBuilder = new Mock<IMessageBuilder>(); 
             var testPerson = new Person("Anton");
             var mockRepo = new Mock<IPeopleRepository>();
-            mockRepo.Setup(repo => repo.CheckIfNameExistsInWorld(testPerson.Name)).Returns(false);
+            mockRepo.Setup(repo => repo.RemovePersonFromDataStore(testPerson));
 
-            var controller = new TimeController(mockRepo.Object, mockMessageBuilder.Object);
+            var controller = new TimeController(mockRepo.Object, new Mock<IMessageBuilder>().Object);
             // when 
             controller.RemovePersonFromWorld(testPerson);
             
             // then
-            mockRepo.Verify(repo => repo.CheckIfNameExistsInWorld(testPerson.Name), Times.Never);
+            mockRepo.Verify(repo => repo.RemovePersonFromDataStore(testPerson), Times.Never);
         }
         
     }

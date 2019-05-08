@@ -8,10 +8,9 @@ namespace HelloWorldWebApp.Services
     public interface IPeopleRepository
     {
         List<Person> GetPeopleList();
-        bool CheckIfNameExistsInWorld(string name);
-        Task<int> AddPersonToContext(Person person);
-        Task<int> RemovePersonFromWorld(Person person);
-        
-        bool CheckIfOwnerName(string name);
+        bool CheckIfNameExistsInDataStore(string name);
+        Task<int> AddPersonToDataStore(Person person);
+        Task<int> RemovePersonFromDataStore(Person person);
+        Task<int> UpdatePersonInDataStore(NameChangeRequest request);
     }
 }
