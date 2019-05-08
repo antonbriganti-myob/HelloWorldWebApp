@@ -1,4 +1,6 @@
-using System;
+﻿using System;
+using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 using HelloWorldWebApp.Models;
 using HelloWorldWebApp.Services;
@@ -65,9 +67,9 @@ namespace HelloWorldWebApp.Controllers
         }
         
         [HttpPut]
-        public async Task<IActionResult> UpdatePersonInWorld(Person person)
+        public async Task<IActionResult> UpdatePersonInWorld(NameChangeRequest nameChangeRequest)
         {
-
+            
             return BadRequest();
         }
 

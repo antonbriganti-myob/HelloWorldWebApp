@@ -43,8 +43,13 @@ namespace HelloWorldWebApp.Services
             _context.People.Remove(GetPersonFromContext(person.Name));
             return _context.SaveChangesAsync();
         }
-        
-        
+
+        public Task<int> UpdatePersonInDataStore(NameChangeRequest request)
+        {
+            _context.People.FirstOrDefault(person => person.Name == request.OldName).Name = request.NewName;
+            return _context.SaveChangesAsync();
+        }
+
 
         public bool CheckIfOwnerName(string name)
         {
