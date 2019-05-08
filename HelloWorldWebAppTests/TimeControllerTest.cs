@@ -186,7 +186,7 @@ namespace HelloWorldWebAppTests
             var testRequest = new NameChangeRequest("Greg", "John");
             var mockRepo = new Mock<IPeopleRepository>();
             
-            mockRepo.Setup(repo => repo.CheckIfNameExistsInDataStore(testRequest.OldName)).Returns(true);
+            mockRepo.Setup(repo => repo.CheckIfNameExistsInDataStore(testRequest.OldName)).Returns(false);
             mockRepo.Setup(repo => repo.CheckIfNameExistsInDataStore(testRequest.NewName)).Returns(false);
             mockRepo.Setup(repo => repo.UpdatePersonInDataStore(testRequest));
             var controller = new TimeController(mockRepo.Object, new Mock<IMessageBuilder>().Object);
@@ -195,7 +195,43 @@ namespace HelloWorldWebAppTests
             controller.UpdatePersonInWorld(testRequest);
             
             // then
-            mockRepo.Verify(repo => repo.UpdatePersonInDataStore(testRequest));
+            mockRepo.Verify(repo => repo.UpdatePersonInDataStore(testRequest), Times.Never);
+        }
+        
+        [Fact]
+        public void UpdatePersonName_DoesNotCall_UpdatePersonInDataStore_WhenNewNameDoesExistsInRepo()
+        {
+            // given
+            var testRequest = new NameChangeRequest("Greg", "John");
+            var mockRepo = new Mock<IPeopleRepository>();
+            
+            mockRepo.Setup(repo => repo.CheckIfNameExistsInDataStore(testRequest.OldName)).Returns(false);
+            mockRepo.Setup(repo => repo.CheckIfNameExistsInDataStore(testRequest.NewName)).Returns(true);
+            mockRepo.Setup(repo => repo.UpdatePersonInDataStore(testRequest));
+            var controller = new TimeController(mockRepo.Object, new Mock<IMessageBuilder>().Object);
+            
+            // when 
+            controller.UpdatePersonInWorld(testRequest);
+            
+            // then
+            mockRepo.Verify(repo => repo.UpdatePersonInDataStore(testRequest), Times.Never);
+        }
+        
+        [Fact]
+        public void UpdatePersonName_DoesNotCall_UpdatePersonInDataStore_WhenOldNameIsOwner()
+        {
+            // given
+            var testRequest = new NameChangeRequest("Anton", "John");
+            var mockRepo = new Mock<IPeopleRepository>();
+            
+            mockRepo.Setup(repo => repo.UpdatePersonInDataStore(testRequest));
+            var controller = new TimeController(mockRepo.Object, new Mock<IMessageBuilder>().Object);
+            
+            // when 
+            controller.UpdatePersonInWorld(testRequest);
+            
+            // then
+            mockRepo.Verify(repo => repo.UpdatePersonInDataStore(testRequest), Times.Never);
         }
     }
 }

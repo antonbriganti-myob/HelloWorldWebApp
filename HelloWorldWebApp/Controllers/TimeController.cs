@@ -69,8 +69,21 @@ namespace HelloWorldWebApp.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdatePersonInWorld(NameChangeRequest nameChangeRequest)
         {
-            
-            return BadRequest();
+            if (!CheckIfOwnerName(nameChangeRequest.OldName))
+            {
+                if (!_peopleRepository.CheckIfNameExistsInDataStore(nameChangeRequest.OldName))
+                {
+                    return BadRequest("old name isn't there");
+                }
+                if (_peopleRepository.CheckIfNameExistsInDataStore(nameChangeRequest.NewName))
+                {
+                    return BadRequest("new name already there");
+                }
+
+                await _peopleRepository.UpdatePersonInDataStore(nameChangeRequest);
+                return new  OkObjectResult("got it");
+            }
+            return BadRequest("that's me tho");
         }
 
         private static bool CheckIfOwnerName(string name)
