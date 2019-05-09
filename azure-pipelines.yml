@@ -23,3 +23,9 @@ steps:
     command: test
     projects: '**/*Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
+- task: AzureRmWebAppDeployment@3
+  displayName: 'Deploying 🤞'
+  inputs:
+    azureSubscription: 'HelloWorldFMA'
+    WebAppName: 'HelloWorldFMAApp'
+    Package: '$(System.DefaultWorkingDirectory)/**/*.war'
