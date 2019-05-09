@@ -27,7 +27,7 @@ steps:
   displayName: 'Collect Artifacts 📥'
   inputs:
     command: publish
-    publishWebProjects: True
+    publishWebProjects: False
     arguments: 'HelloWorldWebApp --configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: True
 - task: AzureRmWebAppDeployment@3
