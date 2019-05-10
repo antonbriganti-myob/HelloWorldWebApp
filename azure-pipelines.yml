@@ -30,7 +30,7 @@ steps:
     publishWebProjects: False
     arguments: 'HelloWorldWebApp --configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: True
-- task: AzureRmWebAppDeployment@3
+- task: AzureRmWebAppDeployment@4
   displayName: 'Deploying 🤞'
   inputs:
     azureSubscription: 'HelloWorldFMA'
