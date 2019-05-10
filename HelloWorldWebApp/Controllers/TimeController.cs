@@ -41,10 +41,10 @@ namespace HelloWorldWebApp.Controllers
             if (!_peopleRepository.CheckIfNameExistsInDataStore(person.Name))
             {
                 await _peopleRepository.AddPersonToDataStore(person);
-                return CreatedAtAction("AddPersonToWorld", person, person.Name + " has been added to the world");
+                return CreatedAtAction("AddPersonToWorld", person, $"{person.Name} has been added to the world");
             }
 
-            return BadRequest("Person with that name already exists in the world");
+            return BadRequest($"{person.Name}  already exists in the world");
 
         }
 
@@ -55,9 +55,9 @@ namespace HelloWorldWebApp.Controllers
             if (!CheckIfOwnerName(person.Name))
             {
                 if (!_peopleRepository.CheckIfNameExistsInDataStore(person.Name))
-                    return NotFound("No such person with that name exists in the world");
+                    return NotFound($"No person with the name {person.Name} exists in the world");
                 await _peopleRepository.RemovePersonFromDataStore(person);
-                return new OkObjectResult(person.Name + " has been removed from the world");
+                return new OkObjectResult($"{person.Name} has been removed from the world");
 
             }
             return BadRequest("Anton can't be removed from the world");
@@ -70,17 +70,18 @@ namespace HelloWorldWebApp.Controllers
             {
                 if (!_peopleRepository.CheckIfNameExistsInDataStore(nameChangeRequest.OldName))
                 {
-                    return BadRequest("old name isn't there");
+                    return BadRequest($"{nameChangeRequest.OldName} does not exist in the world, and was not updated");
                 }
                 if (_peopleRepository.CheckIfNameExistsInDataStore(nameChangeRequest.NewName))
                 {
-                    return BadRequest("new name already there");
+                    return BadRequest($"{nameChangeRequest.NewName} already exists in the world");
                 }
 
                 await _peopleRepository.UpdatePersonInDataStore(nameChangeRequest);
-                return new  OkObjectResult("got it");
+                return new  OkObjectResult(
+                    $"{nameChangeRequest.OldName} has been changed to {nameChangeRequest.NewName} in the world");
             }
-            return BadRequest("that's me tho");
+            return BadRequest("Can't change the owner's name");
         }
 
         private static bool CheckIfOwnerName(string name)
