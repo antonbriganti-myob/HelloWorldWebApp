@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using HelloWorldWebApp.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace HelloWorldWebApp.Services
 {

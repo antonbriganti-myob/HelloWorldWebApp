@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using HelloWorldWebApp.Models;
 using HelloWorldWebApp.Services;
 using HelloWorldWebAppTests.Helpers;
-using Moq;
 using Xunit;
 
 namespace HelloWorldWebAppTests

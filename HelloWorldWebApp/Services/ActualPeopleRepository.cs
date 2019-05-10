@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using HelloWorldWebApp.Data;
 using HelloWorldWebApp.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace HelloWorldWebApp.Services
 {

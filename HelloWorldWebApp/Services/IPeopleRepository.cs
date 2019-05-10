@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using HelloWorldWebApp.Data;
 using HelloWorldWebApp.Models;
 
 namespace HelloWorldWebApp.Services
