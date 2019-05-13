@@ -8,30 +8,41 @@ namespace HelloWorldWebAppTests
 {
     public class MessageBuilderTest
     {
-
-        private readonly ActualMessageBuilder _messageBuilder;
         public MessageBuilderTest()
         {
             var dateTimeMock = DateTimeHelper.CreateMockDateTime();
             _messageBuilder = new ActualMessageBuilder(dateTimeMock.Object);
-
         }
+
+        private readonly ActualMessageBuilder _messageBuilder;
 
         [Fact]
         public void CreateFormattedMessageOfPeopleInServer_ReturnsSingleName_WhenGivenSinglePerson()
         {
-            // Given
             var nameList = new List<Person>
             {
                 new Person("Anton")
             };
-
-            // When
-            var actualMessage = _messageBuilder.CreateGreetingMessage(nameList);
             var expectedMessage = "Anton";
 
+            var actualMessage = _messageBuilder.CreateGreetingMessage(nameList);
 
-            // Then
+            Assert.Equal(expectedMessage, actualMessage);
+        }
+
+        [Fact]
+        public void CreateFormattedMessageOfPeopleInServer_ReturnsThreeNamesInCorrectFormatting_WhenGivenThreePeople()
+        {
+            var nameList = new List<Person>
+            {
+                new Person("Anton"),
+                new Person("Deb"),
+                new Person("Tim")
+            };
+            var expectedMessage = "Anton, Deb, and Tim";
+
+            var actualMessage = _messageBuilder.CreateGreetingMessage(nameList);
+
             Assert.Equal(expectedMessage, actualMessage);
         }
 
@@ -44,33 +55,11 @@ namespace HelloWorldWebAppTests
                 new Person("Anton"),
                 new Person("Deb")
             };
-
-            // When
-            var actualMessage = _messageBuilder.CreateGreetingMessage(nameList);
             var expectedMessage = "Anton and Deb";
 
-
-            // Then
-            Assert.Equal(expectedMessage, actualMessage);
-        }
-
-        [Fact]
-        public void CreateFormattedMessageOfPeopleInServer_ReturnsThreeNamesInCorrectFormatting_WhenGivenThreePeople()
-        {
-            // Given
-            var nameList = new List<Person>
-            {
-                new Person("Anton"),
-                new Person("Deb"),
-                new Person("Tim")
-            };
-
             // When
             var actualMessage = _messageBuilder.CreateGreetingMessage(nameList);
-            var expectedMessage = "Anton, Deb, and Tim";
 
-
-            // Then
             Assert.Equal(expectedMessage, actualMessage);
         }
 
@@ -81,9 +70,9 @@ namespace HelloWorldWebAppTests
             {
                 new Person("Anton")
             };
+            var expectedMessage = "Hello Anton - the time on the server is 10:48PM on 14 March 2018";
 
             var actualMessage = _messageBuilder.CreateGreetingWithTimeMessage(nameList);
-            var expectedMessage = "Hello Anton - the time on the server is 10:48PM on 14 March 2018";
 
             Assert.Equal(expectedMessage, actualMessage);
         }

@@ -8,7 +8,7 @@ namespace HelloWorldWebApp.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class TimeController : ControllerBase
-    { 
+    {
         private readonly IMessageBuilder _messageBuilder;
         private readonly IPeopleRepository _peopleRepository;
 
@@ -21,11 +21,11 @@ namespace HelloWorldWebApp.Controllers
         [HttpGet]
         public ActionResult<string> GetGreetingWithTime()
         {
-            var peopleList = _peopleRepository.GetPeopleList(); 
+            var peopleList = _peopleRepository.GetPeopleList();
             var message = _messageBuilder.CreateGreetingWithTimeMessage(peopleList);
             return message;
         }
-        
+
         [HttpGet("people")]
         public ActionResult<string> GetNamesInServer()
         {
@@ -44,43 +44,38 @@ namespace HelloWorldWebApp.Controllers
                 return CreatedAtAction("AddPersonToWorld", person, $"{person.Name} has been added to the world");
             }
 
-            return BadRequest($"{person.Name}  already exists in the world");
-
+            return BadRequest($"{person.Name} already exists in the world");
         }
 
         [HttpDelete]
         public async Task<IActionResult> RemovePersonFromWorld(Person person)
         {
-            
             if (!CheckIfOwnerName(person.Name))
             {
                 if (!_peopleRepository.CheckIfNameExistsInDataStore(person.Name))
                     return NotFound($"No person with the name {person.Name} exists in the world");
                 await _peopleRepository.RemovePersonFromDataStore(person);
                 return new OkObjectResult($"{person.Name} has been removed from the world");
-
             }
+
             return BadRequest("Anton can't be removed from the world");
         }
-        
+
         [HttpPut]
         public async Task<IActionResult> UpdatePersonInWorld(NameChangeRequest nameChangeRequest)
         {
             if (!CheckIfOwnerName(nameChangeRequest.OldName))
             {
                 if (!_peopleRepository.CheckIfNameExistsInDataStore(nameChangeRequest.OldName))
-                {
                     return BadRequest($"{nameChangeRequest.OldName} does not exist in the world, and was not updated");
-                }
                 if (_peopleRepository.CheckIfNameExistsInDataStore(nameChangeRequest.NewName))
-                {
                     return BadRequest($"{nameChangeRequest.NewName} already exists in the world");
-                }
 
                 await _peopleRepository.UpdatePersonInDataStore(nameChangeRequest);
-                return new  OkObjectResult(
+                return new OkObjectResult(
                     $"{nameChangeRequest.OldName} has been changed to {nameChangeRequest.NewName} in the world");
             }
+
             return BadRequest("Can't change the owner's name");
         }
 
