@@ -38,9 +38,9 @@ namespace HelloWorldWebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> AddPersonToWorld(Person person)
         {
-            if (!_peopleRepository.CheckIfNameExistsInDataStore(person.Name))
+            if (!_peopleRepository.CheckIfNameExistsInRepository(person.Name))
             {
-                await _peopleRepository.AddPersonToDataStore(person);
+                await _peopleRepository.AddPersonToRepository(person);
                 return CreatedAtAction("AddPersonToWorld", person, $"{person.Name} has been added to the world");
             }
 
@@ -52,9 +52,9 @@ namespace HelloWorldWebApp.Controllers
         {
             if (!CheckIfOwnerName(person.Name))
             {
-                if (!_peopleRepository.CheckIfNameExistsInDataStore(person.Name))
+                if (!_peopleRepository.CheckIfNameExistsInRepository(person.Name))
                     return NotFound($"No person with the name {person.Name} exists in the world");
-                await _peopleRepository.RemovePersonFromDataStore(person);
+                await _peopleRepository.RemovePersonFromRepository(person);
                 return new OkObjectResult($"{person.Name} has been removed from the world");
             }
 
@@ -66,12 +66,12 @@ namespace HelloWorldWebApp.Controllers
         {
             if (!CheckIfOwnerName(nameChangeRequest.OldName))
             {
-                if (!_peopleRepository.CheckIfNameExistsInDataStore(nameChangeRequest.OldName))
+                if (!_peopleRepository.CheckIfNameExistsInRepository(nameChangeRequest.OldName))
                     return BadRequest($"{nameChangeRequest.OldName} does not exist in the world, and was not updated");
-                if (_peopleRepository.CheckIfNameExistsInDataStore(nameChangeRequest.NewName))
+                if (_peopleRepository.CheckIfNameExistsInRepository(nameChangeRequest.NewName))
                     return BadRequest($"{nameChangeRequest.NewName} already exists in the world");
 
-                await _peopleRepository.UpdatePersonInDataStore(nameChangeRequest);
+                await _peopleRepository.UpdatePersonInRepository(nameChangeRequest);
                 return new OkObjectResult(
                     $"{nameChangeRequest.OldName} has been changed to {nameChangeRequest.NewName} in the world");
             }
