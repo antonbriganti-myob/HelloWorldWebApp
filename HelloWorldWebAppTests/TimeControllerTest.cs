@@ -37,16 +37,6 @@ namespace HelloWorldWebAppTests
             mockRepo.Verify(repo => repo.AddPersonToRepository(testPerson), Times.Never);
         }
 
-        [Fact]
-        public void AddPersonToWorld_ReturnsInvalid_WhenNoInputGiven()
-        {
-            var mockRepo = new Mock<IPeopleRepository>();
-            var controller = new TimeController(mockRepo.Object, new Mock<IMessageBuilder>().Object);
-
-            var result = controller.AddPersonToWorld(null);
-
-            Assert.IsType(result.GetType(), "".GetType());
-        }
 
         [Fact]
         public void GetGreetingWithTime_Calls_RepoAndMessageBuilder()
