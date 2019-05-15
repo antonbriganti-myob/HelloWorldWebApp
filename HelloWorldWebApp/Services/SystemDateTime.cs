@@ -6,8 +6,7 @@ namespace HelloWorldWebApp.Services
     {
         public DateTime GetCurrentTimeAndDate()
         {
-            TimeZoneInfo australianTimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("Australia/Melbourne");
-            return TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, australianTimeZoneInfo);
+            return TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.Local);
         }
     }
 }
