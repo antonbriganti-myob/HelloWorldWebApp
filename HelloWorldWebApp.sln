@@ -1,4 +1,4 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorldWebApp", "HelloWorldWebApp\HelloWorldWebApp.csproj", "{1FD5108B-37C0-429D-A605-322C6D88DD6E}"

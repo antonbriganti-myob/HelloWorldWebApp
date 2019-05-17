@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using HelloWorldWebApp.Models;
+﻿using HelloWorldWebApp.Models;
 using HelloWorldWebApp.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,11 +35,16 @@ namespace HelloWorldWebApp.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> AddPersonToWorld(Person person)
+        public IActionResult AddPersonToWorld(Person person)
         {
+            if (person == null)
+            {
+                return BadRequest("No person was given");
+            }
+
             if (!_peopleRepository.CheckIfNameExistsInRepository(person.Name))
             {
-                await _peopleRepository.AddPersonToRepository(person);
+                _peopleRepository.AddPersonToRepository(person);
                 return CreatedAtAction("AddPersonToWorld", person, $"{person.Name} has been added to the world");
             }
 
@@ -48,13 +52,13 @@ namespace HelloWorldWebApp.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> RemovePersonFromWorld(Person person)
+        public IActionResult RemovePersonFromWorld(Person person)
         {
             if (!CheckIfOwnerName(person.Name))
             {
                 if (!_peopleRepository.CheckIfNameExistsInRepository(person.Name))
                     return NotFound($"No person with the name {person.Name} exists in the world");
-                await _peopleRepository.RemovePersonFromRepository(person);
+                _peopleRepository.RemovePersonFromRepository(person);
                 return new OkObjectResult($"{person.Name} has been removed from the world");
             }
 
@@ -62,7 +66,7 @@ namespace HelloWorldWebApp.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdatePersonInWorld(NameChangeRequest nameChangeRequest)
+        public IActionResult UpdatePersonInWorld(NameChangeRequest nameChangeRequest)
         {
             if (!CheckIfOwnerName(nameChangeRequest.OldName))
             {
@@ -71,7 +75,7 @@ namespace HelloWorldWebApp.Controllers
                 if (_peopleRepository.CheckIfNameExistsInRepository(nameChangeRequest.NewName))
                     return BadRequest($"{nameChangeRequest.NewName} already exists in the world");
 
-                await _peopleRepository.UpdatePersonInRepository(nameChangeRequest);
+                _peopleRepository.UpdatePersonInRepository(nameChangeRequest);
                 return new OkObjectResult(
                     $"{nameChangeRequest.OldName} has been changed to {nameChangeRequest.NewName} in the world");
             }

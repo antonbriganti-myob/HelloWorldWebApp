@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using HelloWorldWebApp.Models;
 
 namespace HelloWorldWebApp.Services
@@ -8,8 +7,8 @@ namespace HelloWorldWebApp.Services
     {
         List<Person> GetPeopleList();
         bool CheckIfNameExistsInRepository(string name);
-        Task<int> AddPersonToRepository(Person person);
-        Task<int> RemovePersonFromRepository(Person person);
-        Task<int> UpdatePersonInRepository(NameChangeRequest request);
+        void AddPersonToRepository(Person person);
+        void RemovePersonFromRepository(Person person);
+        void UpdatePersonInRepository(NameChangeRequest request);
     }
 }
