@@ -154,6 +154,17 @@ namespace HelloWorldWebAppTests
         }
 
         [Fact]
+        public void RemovePersonToWorld_ReturnsBadRequest_WhenNoPersonIsGiven()
+        {
+            var controller =
+                new TimeController(new Mock<IPeopleRepository>().Object, new Mock<IMessageBuilder>().Object);
+
+            var result = controller.RemovePersonFromWorld(null);
+
+            Assert.IsType<BadRequestObjectResult>(result);
+        }
+
+        [Fact]
         public void UpdatePersonInWorld_Calls_UpdatePersonInRepository_WhenOldNameExistsInRepo_AndNewNameDoesNot()
         {
             var testRequest = new NameChangeRequest("Greg", "John");
@@ -209,6 +220,17 @@ namespace HelloWorldWebAppTests
             controller.UpdatePersonInWorld(testRequest);
 
             mockRepo.Verify(repo => repo.UpdatePersonInRepository(testRequest), Times.Never);
+        }
+
+        [Fact]
+        public void UpdatePersonName_ReturnsBadRequest_WhenNoRequestIsGiven()
+        {
+            var controller =
+                new TimeController(new Mock<IPeopleRepository>().Object, new Mock<IMessageBuilder>().Object);
+
+            var result = controller.UpdatePersonInWorld(null);
+
+            Assert.IsType<BadRequestObjectResult>(result);
         }
     }
 }

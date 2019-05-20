@@ -54,6 +54,11 @@ namespace HelloWorldWebApp.Controllers
         [HttpDelete]
         public IActionResult RemovePersonFromWorld(Person person)
         {
+            if (person == null)
+            {
+                return BadRequest("No person was given");
+            }
+
             if (!CheckIfOwnerName(person.Name))
             {
                 if (!_peopleRepository.CheckIfNameExistsInRepository(person.Name))
@@ -68,6 +73,11 @@ namespace HelloWorldWebApp.Controllers
         [HttpPut]
         public IActionResult UpdatePersonInWorld(NameChangeRequest nameChangeRequest)
         {
+            if (nameChangeRequest == null)
+            {
+                return BadRequest("No name change request was given");
+            }
+
             if (!CheckIfOwnerName(nameChangeRequest.OldName))
             {
                 if (!_peopleRepository.CheckIfNameExistsInRepository(nameChangeRequest.OldName))
