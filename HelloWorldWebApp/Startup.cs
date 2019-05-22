@@ -23,8 +23,8 @@ namespace HelloWorldWebApp
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<PeopleContext>(options => options.UseInMemoryDatabase("People"));
-            services.AddSingleton<IMessageBuilder, ActualMessageBuilder>();
-            services.AddSingleton<IDateTime, SystemDateTime>();
+            services.AddTransient<IMessageBuilder, ActualMessageBuilder>();
+            services.AddTransient<IDateTime, SystemDateTime>();
             services.AddScoped<IPeopleRepository, ActualPeopleRepository>();
         }
 
