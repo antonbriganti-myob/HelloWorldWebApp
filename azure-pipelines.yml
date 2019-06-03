@@ -15,14 +15,14 @@ variables:
 steps:
 - script: dotnet restore
   displayName: 'Restoring Dependencies ⛑'
-- script: dotnet build HelloWorldWebApp --configuration $(buildConfiguration)
-  displayName: 'Building Project 🔨 dotnet build $(buildConfiguration)'
 - task: DotNetCoreCLI@2
   displayName: 'Running Tests 🔍'
   inputs:
     command: test
     projects: '**/*Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
+- script: dotnet build HelloWorldWebApp --configuration $(buildConfiguration)
+  displayName: 'Building Project 🔨 dotnet build $(buildConfiguration)'
 - task: DotNetCoreCLI@2
   displayName: 'Collect Artifacts 📥'
   inputs:
